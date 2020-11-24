@@ -98,7 +98,7 @@ fn response_status(status_code: StatusCode) -> Response<Body> {
 }
 
 fn main() {
-    let addr = ([127, 0, 0, 1], 8080).into();
+    let addr = ([0, 0, 0, 0], 8080).into();
     let builder = Server::bind(&addr);
     let user_db: UserDb = Arc::new(Mutex::new(Slab::new()));
     let server = builder.serve(move || {
