@@ -1,5 +1,5 @@
 [package]
-name = "rust-microservice"
+name = "rust-microservices"
 version = "0.1.0"
 authors = ["Gene Kuo <yuchiung10@yahoo.com.tw>"]
 edition = "2018"

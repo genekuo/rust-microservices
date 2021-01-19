@@ -1,7 +1,26 @@
-version: '2.1'
+version: '3.6'
 
 services:
-  rust-microservice:
-    build: .
+  db:
+    #image: postgres:9.6-alpine
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
     ports:
-      - "8080:8080"
+      - 5432:5432
+
+  rust-microservices:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - RUST_BACKTRACE=1
+      - RUST_LOG=debug
+      - ROCKET_ADDRESS=0.0.0.0
+      - ROCKET_PORT=8000
+      - DATABASE_URL=postgres://username:password@db/postgres
+    ports:
+      - "8000:8000"

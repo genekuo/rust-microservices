@@ -3,7 +3,9 @@
 use diesel;
 use diesel::prelude::*;
 
-use crate::sample::Post;
+use crate::sample::model::Post;
+use crate::sample::model::NewPost;
+
 use crate::schema::posts;
 use crate::schema::posts::dsl::*;
 
@@ -19,17 +21,17 @@ pub fn show_posts(connection: &PgConnection) -> QueryResult<Vec<Post>>  {
         .load::<Post>(&*connection)
 }
 
-#[table_name="posts"]
-#[derive(AsChangeset, Serialize, Deserialize, Queryable, Insertable)]
-pub struct NewPost {
-    pub title: String,
-    pub body: String,
+pub fn get_post(post_id: i32, connection: &PgConnection) -> QueryResult<Post> {
+    posts::table.find(post_id).get_result::<Post>(connection)
 }
 
+pub fn update_post(post_id: i32, post: Post, connection: &PgConnection) -> QueryResult<Post> {
+    diesel::update(posts::table.find(post_id))
+        .set(&post)
+        .get_result(connection)
+}
 
-
-
-
-
-
-
+pub fn delete_post(post_id: i32, connection: &PgConnection) -> QueryResult<usize> {
+    diesel::delete(posts::table.find(post_id))
+        .execute(connection)
+}

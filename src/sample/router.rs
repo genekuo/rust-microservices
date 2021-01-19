@@ -6,10 +6,13 @@ use crate::sample;
 pub fn create_routes() {
     rocket::ignite()
         .manage(connection::init_pool())
-        .mount("/post",
+        .mount("/posts",
                routes![
-                    sample::handler::post,
-                    sample::handler::all
+                    sample::handler::all_posts,
+                    sample::handler::create_post,
+                    sample::handler::get_post,
+                    sample::handler::update_post,
+                    sample::handler::delete_post
                     ],
         ).launch();
 }
