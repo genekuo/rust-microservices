@@ -24,7 +24,7 @@ pub fn create_post(new_post: Json<NewPost>, connection: DbConn) ->  Result<statu
         .map(|post| post_created(post))
         .map_err(|error| error_status(error))
 
-} 
+}
 
 #[get("/<id>")]
 pub fn get_post(id: i32, connection: DbConn) -> Result<Json<Post>, Status> {
