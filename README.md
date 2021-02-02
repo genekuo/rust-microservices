@@ -5,7 +5,9 @@
 `docker run --rm --detach --name postgres --env POSTGRES_USER=username --env POSTGRES_PASSWORD=password --publish 127.0.0.1:5432:5432 postgres`
 
 `diesel setup`
+
 `diesel migration generate create_posts`
+
 `diesel migration run`
 
 ## Run and test services
