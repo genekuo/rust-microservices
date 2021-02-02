@@ -27,6 +27,8 @@
 
 `curl http://localhost:8000/posts`
 
+`docker stop <postgres-container-id>`
+
 ## docker-compose deployment and test
 
 `docker-compose up -d`
